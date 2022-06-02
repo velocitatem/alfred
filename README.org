@@ -1,0 +1,9 @@
+#+title: Alfred
+
+Alfred is a simple python script to generate a report on your finances managed by ledger.
+
+
+* Usage
+1. Configure accounts to keep track of in the script
+2. Configure paths for your ledger and directory for repors
+3. Configure are crontab?
