@@ -16,7 +16,7 @@ accounts = [
 
 ledger = "~/Documents/Me/Finance/my.ledger"
 reports_directory = "/home/velo/Documents/Me/Finance/reports/"
-currency = "CZK"
+currency_list = ["CZK", "EUR"]
 
 
 d = datetime.datetime.now()
@@ -35,14 +35,25 @@ def get_report_m(acc):
 def orgify_report(report):
     orgified_report = ""
     report=report.split("--------------------")
-    print(report)
+
+
+    
+    #identify currency
+    def id_currency(string):
+        currency = currency_list[0]
+        for c in currency_list:
+            if c in string:
+                return c
+
+    currency = id_currency(report[0])
     if len(report) == 1:
         return "+ TOTAL :: " +  report[0].strip().split(currency)[0] + " " + currency
     elif len(report) > 1:
         report_details = report[0].split("\n")
+        print("DEBUG: report [1]: %s",report[1])
         orgified_report += "+ TOTAL :: " + report[1].strip() + " \n** Breakdown"
         for ex in report_details[0:-1]:
-            print(ex)
+            currency = id_currency(ex)
             detail = ex.split(currency)
             lbl = detail[1].strip()
             amt = detail[0].strip()
@@ -70,3 +81,4 @@ file_name = "Financial Report "+month_name+" "+year+".org"
 file = open(reports_directory+file_name, "w")
 file.writelines(final_report)
 file.close()
+ 
