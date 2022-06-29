@@ -24,4 +24,8 @@ Also supports 2 currencies, maybe more?
 #+end_src
 2. run install.sh
 
+* TODO alfred [1/3]
++ [X] Multiple currency fix in report
++ [ ] Create report generation script
++ [ ] Implement user variables into something
 
