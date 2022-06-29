@@ -2,3 +2,26 @@
 
 A way to think about personal finance with ledger and ledger-mode for emacs.
 
+* What does Alfred do?
+Alfred makes it much easier to keep track of your finances using ledger in emacs. It allows you to quickly insert expenses into your ledger while automatically keeping track of you budget and savings.
+Also supports 2 currencies, maybe more?
+
+** Details
++ Each months, using a crontab, it creates a new account in ledger "Assets:Budget:MonthName"
++ Provides a capture template to add expenses coming from this budget
++ Generates a monthly report on your finances
+
+* Installation
+1. Paste the org-capture-template into your config
+#+begin_src emacs-lisp :tangle yes
+(defun function-for-financial-template ()
+  (concat ledger-date-string-today " *%^{Event} \n\t" "Expenses:%^{type} \t\t %^{amount}\n\tAssets:Budget:%<%B>" ))
+
+(setq org-capture-templates  '(("f" "Add a financial expense" plain
+                                (file "/home/velo/Documents/Me/Finance/my.ledger")
+                                (function function-for-financial-template))
+                               ))
+#+end_src
+2. run install.sh
+
+
